@@ -1,6 +1,7 @@
 import crabber
 import os
 import random
+import sys
 from typing import Optional
 
 
@@ -45,10 +46,19 @@ def get_rating(image=True):
     return random.choice(ratings['image' if image else 'no_image'])
 
 
+# Local testing
+if '--test' in sys.argv:
+    api_key = '3662978d1495bc5929a55286437c6c37'
+    access_token = 'c7a55c8bcda59928a810145d923a5ceb'
+    base_url = 'http://localhost'
+else:
+    api_key = '2f47730836040bc37cea2f969a666e50'
+    access_token = 'f219fa030be72c7d68dae402efe36c62'
+    base_url = 'https://crabber.net'
+
 # Connect to Crabber
-api = crabber.API('3662978d1495bc5929a55286437c6c37',
-                  access_token='c7a55c8bcda59928a810145d923a5ceb',
-                  base_url='http://localhost')
+api = crabber.API(api_key, access_token=access_token, base_url=base_url)
+
 # Get username of authenticated user
 ratings = load_ratings(script_dir)
 last_checked = load_last_checked(script_dir)
