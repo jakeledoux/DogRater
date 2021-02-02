@@ -4,6 +4,9 @@ import random
 from typing import Optional
 
 
+script_dir = os.path.dirname(os.path.realpath(__file__))
+
+
 def load_last_checked(base_dir: Optional[str] = None) -> str:
     # Load ratings from disk
     last_checked_file = os.path.join(base_dir or '', 'last_checked.txt')
@@ -47,8 +50,8 @@ api = crabber.API('3662978d1495bc5929a55286437c6c37',
                   access_token='c7a55c8bcda59928a810145d923a5ceb',
                   base_url='http://localhost')
 # Get username of authenticated user
-ratings = load_ratings()
-last_checked = load_last_checked()
+ratings = load_ratings(script_dir)
+last_checked = load_last_checked(script_dir)
 
 # Respond to new mentions
 mentions = get_mentions(since_ts=last_checked)
@@ -60,4 +63,4 @@ for mention in reversed(mentions):
     mention.reply(response)
 
 # Save state
-write_last_checked(last_checked)
+write_last_checked(last_checked, script_dir)
