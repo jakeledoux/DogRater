@@ -4,7 +4,6 @@ import random
 import sys
 from typing import Optional
 
-
 script_dir = os.path.dirname(os.path.realpath(__file__))
 
 
@@ -22,6 +21,7 @@ def write_last_checked(last_checked: str, base_dir: Optional[str] = None):
     last_checked_file = os.path.join(base_dir or '', 'last_checked.txt')
     with open(last_checked_file, 'w') as f:
         f.write(str(last_checked))
+
 
 def load_ratings(base_dir: Optional[str] = None):
     # Load ratings from disk
