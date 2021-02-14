@@ -48,12 +48,12 @@ def get_rating(image=True):
 
 # Local testing
 if '--test' in sys.argv:
-    api_key = '3662978d1495bc5929a55286437c6c37'
-    access_token = 'c7a55c8bcda59928a810145d923a5ceb'
+    api_key = os.environ.get('DOGRATER_LOCAL_KEY')
+    access_token = os.environ.get('DOGRATER_LOCAL_TOKEN')
     base_url = 'http://localhost'
 else:
-    api_key = '2f47730836040bc37cea2f969a666e50'
-    access_token = 'f219fa030be72c7d68dae402efe36c62'
+    api_key = os.environ.get('DOGRATER_DEPLOY_KEY')
+    access_token = os.environ.get('DOGRATER_DEPLOY_TOKEN')
     base_url = 'https://crabber.net'
 
 # Connect to Crabber
