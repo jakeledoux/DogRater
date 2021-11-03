@@ -27,9 +27,15 @@ def load_ratings(base_dir: Optional[str] = None):
     # Load ratings from disk
     ratings = {'image': [], 'no_image': []}
     with open(os.path.join(base_dir or '', 'no_image.txt'), 'r') as f:
-        ratings['no_image'] = f.read().splitlines()
+        ratings['no_image'] = [rating.strip()
+                               for rating in f.read().splitlines()
+                               if rating.strip()
+                               and not rating.strip().startswith('#')]
     with open(os.path.join(base_dir or '', 'ratings.txt'), 'r') as f:
-        ratings['image'] = f.read().splitlines()
+        ratings['image'] = [rating.strip()
+                            for rating in f.read().splitlines()
+                            if rating.strip()
+                            and not rating.strip().startswith('#')]
 
     return ratings
 
